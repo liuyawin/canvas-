@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>打印canvas</title>
+		<style>
+			body{
+				background-color: #DDDDDD;
+			}
+			
+			#canvas{
+				position: absolute;
+				left: 10px;
+				top: 1.5em;
+				margin: 20px;
+				border: thin solid #AAAAAA;
+			}
+			
+			#snapshotImage{
+				position: absolute;
+				left: 10px;
+				top: 1.5em;
+				margin: 20px;
+				border: thin solid #AAAAAA;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="controls">
+			<input type="button" id="snapshotButton" value="Take Snapshot" />
+		</div>
+		
+		<img src="" alt="" id="snapshotImage" />
+		
+		<canvas id="canvas" width="600" height="300">
+			Canvas not support!
+		</canvas>
+		
+		<script type="text/javascript" src="js/print_canvas.js"></script>
+	</body>
+</html>

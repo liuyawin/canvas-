@@ -1,22 +1,69 @@
 var canvas = document.getElementById("canvas"),
-	context = canvas.getContext('2d');
-	
-context.font = "38pt Arial";
-context.fillStyle = "cornflowerblue";
-context.strokeStyle = "blue";
+	context = canvas.getContext('2d'),
+	FONT_HEIGHT = 15,
+	MARGIN = 35,
+	HAND_TRUNCATION = canvas.width / 25,
+	HOUR_HAND_TRUNCATION = canvas.height / 10,
+	NUMBERAL_SPACING = 20,
+	RADIUS = canvas.width / 2 - MARGIN,
+	HAND_RADIUS = RADIUS + NUMBERAL_SPACING;
 
-context.fillText("Hello Canvas", canvas.width/2-150, canvas.height/2+15);
-context.strokeText("Hello Canvas", canvas.width/2-150, canvas.height/2+15);
+function drawCircle() {
+	context.beginPath();
+	context.arc(canvas.width / 2, canvas.height / 2, RADIUS, 0, Math.PI * 2, true);
+	context.stroke();
+}
 
-//当元素本身大小不符合其绘图表面的大小时，
-//浏览器会对绘图表面进行缩放，使其符合元素的大小。
-var canvas2 = document.getElementById("canvas2"),
-	context2 = canvas2.getContext('2d');
-	
-context2.font = "38pt Arial";
-context2.fillStyle = "cornflowerblue";
-context2.strokeStyle = "blue";
+function drawNumerals() {
+	var numerals = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+		angle = 0,
+		numeralWidth = 0;
 
-context2.fillText("Hello Canvas", canvas2.width/2-150, canvas2.height/2+15);
-context2.strokeText("Hello Canvas", canvas2.width/2-150, canvas2.height/2+15);
+	numerals.forEach(function(numeral) {
+		angle = Math.PI / 6 * (numeral - 3);
+		numeralWidth = context.measureText(numeral).width;
+		context.fillText(numeral,
+			canvas.width / 2 + Math.cos(angle) * (HAND_RADIUS) - numeralWidth / 2,
+			canvas.height / 2 + Math.sin(angle) * (HAND_RADIUS) - FONT_HEIGHT / 3);
+	});
+}
 
+function drawCenter() {
+	context.beginPath();
+	context.arc(canvas.width / 2, canvas.height / 2, 5, 0, Math.PI * 2, true);
+	context.fill();
+}
+
+function drawHand(loc, isHour) {
+	var angle = (Math.PI * 2) * (loc / 60) - Math.PI / 2,
+		handRadius = isHour ? RADIUS - HAND_TRUNCATION - HOUR_HAND_TRUNCATION : 
+							RADIUS - HAND_TRUNCATION;
+
+	context.moveTo(canvas.width / 2, canvas.height / 2);
+	context.lineTo(canvas.width / 2 + Math.cos(angle) * handRadius,
+		canvas.height / 2 + Math.sin(angle) * handRadius);
+
+	context.stroke();
+}
+
+function drawHands() {
+	var date = new Date(),
+		hour = date.getHours();
+
+	hour = hour > 12 ? hour - 12 : hour;
+	drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5);
+	drawHand(date.getMinutes(), false, 0.5);
+	drawHand(date.getSeconds(), false, 0.2);
+}
+
+function drawClock() {
+	context.clearRect(0, 0, canvas.width, canvas.height);
+
+	drawCircle();
+	drawCenter();
+	drawHands();
+	drawNumerals();
+}
+
+context.font = FONT_HEIGHT + 'px Arial';
+loop = setInterval(drawClock, 1000);
