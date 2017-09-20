@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>子路径</title>
+		<style type="text/css">
+			body{
+				background-color: #dddddd;
+			}
+			
+			canvas{
+				background-color: #ffffff;
+				border: 1px solid #aaaaaa;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="600" height="360">
+			Canvas not support!
+		</canvas>
+		
+		<script type="text/javascript">
+			var canvas = document.getElementById('canvas'),
+				context = canvas.getContext('2d');
+				
+				context.strokeStyle = 'blue';
+				context.beginPath();
+				context.rect(60,100,100,100);
+				context.stroke();
+				
+				context.beginPath();
+				context.rect(240,100,100,100);
+				context.stroke();
+		</script>
+	</body>
+</html>

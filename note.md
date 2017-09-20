@@ -100,7 +100,38 @@ canvas元素使用的是“立即模式”来绘制图形的，即它会立刻�
     
 # 绘制
 ## 坐标系统    
+默认：以canvas的左上角为原点，X坐标向右增大，而Y坐标向下延伸。  
+Canvas的坐标系并不是固定的，可以对它进行平移、旋转、缩放以及自定义变换。   
+   
+### 绘制矩形   
+Canvas提供了三个API分别用于矩形的清除、描边以及填充：   
+- clearRect(double x, double y, double w, double h)   
+- strokeRect(double x, double y, double w, double h)   
+- fillRect(double x, double y, double w, double h)  
 
+方法|描述   
+-----|-----   
+clearRect(double x, double y, double w, double h)|将指定矩形与当前剪辑区域相交范围内的所有像素清除。默认情况下，剪辑区域为整个canvas区域，也就是说如果没有改变剪辑区域，该方法会将在参数范围内的所有像素清除。这里所谓的“清除像素”，是指将其颜色设置为全透明的黑色，从而使canvas的背景可以透过该像素显示出来。   
+strokeRect(double x, double y, double w, double h)|可以使用以下属性为指定的矩形描边：strokeStyle、lineWidth、lineJoin、miterJoin。当w或h有一个为零时，绘制为一条线；若二者都为零时，则不进行绘制。   
+fillRect(double x, double y, double w, double h)|使用fillStyle属性填充指定矩形。若w或h为0，则不进行绘制。
+|
+
+### 透明度与颜色   
+可以设置填充矩形的透明度和颜色：   
+```
+context.fillStyle = 'rgba(0,0,225,0.5)';
+```  
+strokeStyle和fillStyle的属性值可以是任意有效的CSS字串。可以用RGB、RGBA、HSL、HSLA以及十六进制标注法来指定颜色，也可以用red、yellow等词来指定颜色。    
+### 渐变色与图案   
+canvas支持线性（linear）渐变和放射（radial）渐变。    
+#### 线性渐变   
+用createLinearGradient()方法来创建线性渐变。需要给该方法传入两个点的x，y坐标，两点之间的连线是canvas建立颜色渐变效果的依据。该方法会返回一个CanvasGradient实例，应用程序将渐变色设置为fillStyle属性的值，在接下来调用fill()方法时都会使用此渐变色进行填充，直至将填充色设置为其他值为止。    
+#### 放射渐变   
+用createRadialGradient()方法创建一个放射渐变，其参数指定两个圆形，表示某圆锥的起止部位。该方法也返回一个CanvasGradient实例。与线性渐变不同，放射渐变的填充范围仅局限于传递给createRadialGradient()方法的那两个原形所定义的圆锥区域内，而不是像线性渐变那样，使用最后一个渐变填充色来填充渐变线以外的区域。    
+
+### 图案   
+除了颜色与渐变色，Canvas元素也允许使用图案来对图形和文本进行描边与填充。这里的图案可以是一下三种之一：image元素、canvas元素或video元素。    
+可以用createPattern()方法来创建图案，该方法接受两个参数：图案本身，以及一个用于告知浏览器应该如何重复图案的字符串。第二个参数可取的值为：repeat、repeat-x、repeat-y或no-repeat。   
 
 
 
