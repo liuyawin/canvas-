@@ -16,8 +16,8 @@
         #container #canvas {
             width: 480px;
             height: 350px;
-            /* border: 1px solid #CCCCCC; */
             margin: 32px auto;
+            cursor: crosshair;
         }
 
         #container #reset {
@@ -25,12 +25,21 @@
             height: 32px;
             font-size: 14px;
         }
+
+        #mask{
+            position: absolute;
+            /* border: 1px solid blue; */
+            background-color: rgba(0, 0, 0, 0.3);
+            cursor: crosshair;
+            display: none;
+        }
     </style>
 
 </head>
 
 <body>
     <div id="container">
+        <div id="mask"></div>
         <canvas id="canvas" width="480" height="350">
             Not support!
         </canvas>
