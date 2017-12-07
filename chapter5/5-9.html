@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #ddd;
+        }
+
+        #canvas{
+            background-color: #fff;
+            cursor: pointer;
+            margin: 10px 10px;
+        }
+
+        #controls{
+            margin: 10px 15px;
+        }
+
+        #animateButton{
+            width: 100px;
+            height: 32px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="animateButton">Animate</button>
+    </div>
+    <canvas id="canvas" width="750" height="500">
+        Canvas not support!
+    </canvas>
+    <script src="js/requestNextAnimationFrame.js"></script>
+    <script src="js/5-9.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
-var canvas = document.getElementById('canvas');
-context = canvas.getContext('2d'),
+var canvas = document.getElementById('canvas'),
+    context = canvas.getContext('2d'),
     offscreenCanvas = document.createElement('canvas'),
     offscreenContext = offscreenCanvas.getContext('2d'),
     image = new Image(),
@@ -53,11 +53,11 @@ function drawConnectors(center) {
     context.stroke();
 }
 
-function putSunglassOn(){
+function putSunglassOn() {
     var imagedata,
         center = {
-            x: canvas.width/2,
-            y: canvas.height/2
+            x: canvas.width / 2,
+            y: canvas.height / 2
         },
         leftLensLocation = {
             x: center.x - LENS_RADIUS - 10,
@@ -69,22 +69,22 @@ function putSunglassOn(){
         },
         imagedata = context.getImageData(0, 0, canvas.width, canvas.height);
 
-        sunglassFilter.postMessage(imagedata);
+    sunglassFilter.postMessage(imagedata);
 
-        sunglassFilter.onmessage = function(e){
-            offscreenContext.putImageData(e.data, 0, 0);
-            drawLenses(leftLensLocation, rightLensLocation);
-            drawWire(center);
-            drawConnectors(center);
-        }
+    sunglassFilter.onmessage = function (e) {
+        offscreenContext.putImageData(e.data, 0, 0);
+        drawLenses(leftLensLocation, rightLensLocation);
+        drawWire(center);
+        drawConnectors(center);
+    }
 }
 
-function drawOriginImage(){
+function drawOriginImage() {
     context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
 }
 
 //Event Handler
-sunglassButton.onclick = function(){
+sunglassButton.onclick = function () {
     if (sunglassOn) {
         sunglassButton.value = 'Suglasses';
         drawOriginImage();
@@ -100,6 +100,6 @@ offscreenCanvas.width = canvas.width;
 offscreenCanvas.height = canvas.height;
 
 image.src = 'imgs/boat.png';
-image.onload = function(){
+image.onload = function () {
     drawOriginImage();
 }
