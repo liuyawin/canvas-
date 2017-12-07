@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>离屏canvas</title>
+    <style>
+        body {
+            background-color: rgba(100, 145, 250, 0.3);
+        }
+
+        #scaleSlider {
+            width: 100px;
+        }
+
+        #canvas {
+            margin: 10px 20px 0 20px;
+            border: thin solid #aaaaaa;
+            cursor: crosshair;
+        }
+
+        #controls {
+            margin-left: 15px;
+            padding: 0;
+        }
+
+        #scaleOutput {
+            color: blue;
+            font: 18px Arial;
+            text-shadow: 2px 2px 4px rgba(100, 140, 250, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="controls">
+        <output id="scaleOutput">1.0</output>
+        <input type="range" id="scaleSlider" min='1' max='3.0' step='0.01' value=1.0>
+        <label for="canvasRadio">canvasRadio</label>
+        <input type="radio" name="canvasRadio" id="canvasRadio">
+        <label for="imageRadio">imageRadio</label>
+        <input type="radio" name="imageRadio" id="imageRadio">
+    </div>
+    <canvas id="canvas" width="800" height="520">
+        Canvas not supports!
+    </canvas>
+    <script src="js/4-8.js"></script>
+</body>
+
+</html>

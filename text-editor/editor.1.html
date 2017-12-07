@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>文字编辑</title>
+    <style>
+        .controller{
+            margin: 32px auto 16px 32px;
+        }
+        .controller select{
+            min-width: 56px;
+            height: 24px;
+            margin-right: 12px;
+        }
+        #canvas {
+            width: 640px;
+            height: 480px;
+            margin-left: 32px;
+            border: 1px solid silver;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="controller">
+        <label for="font">font: </label>
+        <select name="font" id="font">
+            <option value="Palatino">Palatino</option>
+        </select>
+        <label for="size">size: </label>
+        <select name="size" id="size">
+            <option value="24">24</option>
+            <option value="56">56</option>
+            <option value="128">128</option>
+        </select>
+        <label for="strokeStyle">strokeStyle: </label>
+        <select name="strokeStyle" id="strokeStyle">
+            <option value="gray">gray</option>
+            <option value="blue">blue</option>
+            <option value="red">red</option>
+        </select>
+        <label for="fillStyle">fillStyle: </label>
+        <select name="fillStyle" id="fillStyle">
+            <option value="gray">gray</option>
+            <option value="blue">blue</option>
+            <option value="red">red</option>
+        </select>
+    </div>
+    <canvas id="canvas" width="640" height="480px">
+        Not support!
+    </canvas>
+    <script src="js/text-cursor.js"></script>
+    <script src="js/text-line.js"></script>
+    <script src="js/editor.1.js"></script>
+</body>
+
+</html>
