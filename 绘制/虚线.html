@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #000000;
+        }
+
+        #canvas {
+            background-color: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="360px" height="240px"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
+        function drawDashLine(context, x1, y1, x2, y2, dashLength) {
+            var dashLength = dashLength == undefined ? 5 : dashLength;
+            var deltaX = x2 - x1,
+                deltaY = y2 - y1;
+
+            var numDash = Math.floor(
+                Math.sqrt(deltaX * deltaX + deltaY * deltaY) / dashLength
+            );
+
+            for (var i = 0; i < numDash; i++) {
+                context[i % 2 === 0 ? 'moveTo' : 'lineTo'](x1 + (deltaX / numDash) * i, y1 + (deltaY / numDash) * i);
+            }
+
+            context.stroke();
+        }
+
+        context.lineWidth = 3;
+        context.strokeStyle = 'blue';
+        drawDashLine(context, 20, 20, canvas.width - 20, 20);
+
+        //圆和圆弧
+        context.beginPath();
+        context.moveTo(40, 40);
+        context.arc(canvas.width / 4, canvas.height / 2, 80, Math.PI / 4, Math.PI * 3 / 4, false);
+        context.stroke();
+
+        context.beginPath();
+        context.arc(canvas.width * 3 / 4, canvas.height / 2, 80, Math.PI / 4, Math.PI * 3 / 4, false);
+        context.stroke();
+
+        context.beginPath();
+        context.arcTo(50, 50, 100, 100, 80);
+        context.stroke();
+    </script>
+</body>
+
+</html>
