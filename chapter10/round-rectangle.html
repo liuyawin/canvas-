@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圆角矩形</title>
+    <style>
+        body{
+            background: bisque;
+        }
+        #roundRanctangleDiv{
+            position: absolute;
+            left: 50px;
+            top: 70px;
+            width: 450px;
+            height: 80px;
+        }
+        .range{
+            vertical-align: -5px;
+        }
+        #controls{
+            color: blue;
+            margin: 20px 0 0 65px;
+        }
+        #widthRangeDiv{
+            margin-right: 30px;
+            display: inline;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="controls">
+        <div id="widthRangeDiv">
+            Width:
+            <input type="range" id="widthRange" class="range" minimum="5" maximum="100" />
+        </div>
+        <div id="heightRangeDiv">
+            Height:
+            <input type="range" id="heightRange" class="range" minimum="5" maximum="100" />
+        </div>
+    </div>
+    <div id="roundRanctangleDiv"></div>
+    <script src="js/roundRectangle.js"></script>
+    <script>
+        var widthRange = document.getElementById('widthRange'),
+            heightRange = document.getElementById('heightRange'),
+            roundRectangle = new COREHTML5.RoundRectangle('rgba(0,0,0,0.2)', 'darkgoldenrod', widthRange.value, heightRange.value);
+
+        function resize(){
+            roundRectangle.horizontalSizePercent = widthRange.value / 100;
+            roundRectangle.verticalSizePercent = heightRange.value / 100;
+
+            roundRectangle.resize(roundRectangle.domElement.offsetWidth, roundRectangle.domElement.offsetHeight);
+
+            roundRectangle.erase();
+            roundRectangle.draw();
+        }
+
+        widthRange.onchange = resize;
+        heightRange.onchange = resize;
+
+        roundRectangle.appendTo(document.getElementById('roundRanctangleDiv'));
+        roundRectangle.draw();
+    </script>
+</body>
+
+</html>
